@@ -1,23 +1,24 @@
-const fs = require("fs");
+const fs = require('fs');
 const path = require('path');
-const { stdin, stdout,exit } = process;
+const { stdin, stdout} = process;
 
-stdout.write('Enter text please\n')
+stdout.write('Enter text please\n');
 
-// const x =fs.createWriteStream(path.join(__dirname, 'text.txt'));
+fs.open(path.join(__dirname, 'text.txt'), (err) => {
+  if (err) console.log('Error: ', err.message);
+});
 
-stdin.on( 'data', data =>{
-    fs.open(path.join(__dirname, 'text.txt'), (err) => {
-    });
+stdin.on( 'data', data =>{ 
   const dataString = data.toString().toLowerCase().trim();
-    if(dataString == "exit"){
-        process.exit()
-    }else
-fs.appendFile(path.join(__dirname, 'text.txt'), `${data}`, (err) => {
-}
-)})
+  if(dataString == 'exit'){
+    process.exit();
+  }else
+    fs.appendFile(path.join(__dirname, 'text.txt'), `${data}`, (err) => {
+      if (err) console.log('Error: ', err.message);
+    }
+    );});
 
 process.on('exit', function (){
-    console.log(`See you again`);
-})
+  console.log('See you again');
+});
 process.on('SIGINT', process.exit);
