@@ -4,7 +4,7 @@ const { stdin, stdout} = process;
 
 stdout.write('Enter text please\n');
 
-fs.open(path.join(__dirname, 'text.txt'), (err) => {
+fs.open(path.join(__dirname, 'text.txt'),'w', (err) => {
   if (err) console.log('Error: ', err.message);
 });
 
